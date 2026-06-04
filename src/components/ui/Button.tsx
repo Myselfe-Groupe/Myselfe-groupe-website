@@ -10,7 +10,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 }
 
 const base =
-  "inline-flex items-center justify-center rounded-xs transition-colors focus:outline-none disabled:opacity-50 cursor-pointer";
+  "inline-flex items-center justify-center rounded-sm transition-colors focus:outline-none disabled:opacity-50 cursor-pointer";
 
 const variantMap: Record<Variant, string> = {
   primary:
