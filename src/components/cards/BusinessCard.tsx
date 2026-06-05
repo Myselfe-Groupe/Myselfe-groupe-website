@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Button from "@/components/ui/Button";
-import { hover, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 type BusinessCardProps = {
   name: string;
@@ -22,6 +22,11 @@ export default function BusinessCard({
   const cardVariants = {
     rest: {},
     hover: {},
+  };
+
+  const filterVariants = {
+    rest: { opacity: 0 },
+    hover: {  opacity: 1, transition: { duration: 0.2 } },
   };
 
   const contentVariants = {
@@ -49,7 +54,7 @@ export default function BusinessCard({
         animate="rest"
         whileHover="hover"
         variants={cardVariants}
-        className="w-full max-w-5xl rounded-2xl border border-border bg-white/5 p-10 pt-48 shadow-lg backdrop-blur-md overflow-hidden"
+        className="w-full max-w-4xl rounded-2xl border border-border bg-white/5 p-8 pt-44 shadow-lg backdrop-blur-md overflow-hidden"
       >
         <div className="flex flex-col gap-8 md:flex-row md:items-center">
           {logoSrc ? (
@@ -60,19 +65,23 @@ export default function BusinessCard({
                 fill={true}
                 className="rounded-lg object-cover absolute"
               />
+              <motion.span
+                variants={filterVariants}
+                className="absolute inset-0 bg-black/25 rounded-lg"
+              />
             </div>
           ) : null}
 
           <motion.div
             variants={contentVariants}
-            className="flex flex-1 flex-col justify-end self-end z-10"
+            className="flex flex-1 flex-col justify-end self-end z-10 group"
           >
             <h3 className="text-8xl text-background font-title">{name}</h3>
             <span className="h-0.5 w-full rounded-full bg-background mb-2" />
             {description ? (
               <motion.p
                 variants={descriptionVariants}
-                className="mt-3 text-lg text-background max-w-2xl"
+                className="mt-3 text-md text-background max-w-2xl"
               >
                 {description}
               </motion.p>
