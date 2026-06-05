@@ -4,7 +4,6 @@ import Image from "next/image";
 const navLinks = [
 	{ label: "Accueil", href: "#accueil" },
 	{ label: "Namas'Thés", href: "#namas-thes" },
-	{ label: "Contact", href: "#contact" },
 ];
 
 export default function Navbar() {

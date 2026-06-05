@@ -10,13 +10,13 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 }
 
 const base =
-  "inline-flex items-center justify-center rounded-sm transition-colors focus:outline-none disabled:opacity-50 cursor-pointer";
+  "group relative inline-flex items-center justify-center rounded-sm transition-colors focus:outline-none disabled:opacity-50 cursor-pointer";
 
 const variantMap: Record<Variant, string> = {
   primary:
-    "relative bg-primary text-background",
+    "bg-primary text-background",
   secondary:
-    "relative bg-secondary text-background",
+    "bg-secondary text-background",
   outline:
     "bg-transparent text-background border border-border",
 };
@@ -40,8 +40,11 @@ export default function Button({
 
   return (
     <button className={classes} {...props}>
-        <span className="absolute inset-1 border border-border p-4 rounded-xs pointer-events-none" />
-        {children}
+      <span className="absolute inset-1 border border-border rounded-xs pointer-events-none" />
+      <span className="relative z-10 inline-flex flex-col items-center justify-center">
+        <span>{children}</span>
+        <span className="absolute bottom-0 h-px w-full origin-left scale-x-0 bg-current transition-transform duration-300 ease-out group-hover:scale-x-100 group-focus-visible:scale-x-100" />
+      </span>
     </button>
   );
 }

@@ -74,7 +74,7 @@ export default function BusinessCard({
 
           <motion.div
             variants={contentVariants}
-            className="flex flex-1 flex-col justify-end self-end z-10 group"
+            className="flex flex-1 flex-col justify-end self-end z-10"
           >
             <h3 className="text-8xl text-background font-title">{name}</h3>
             <span className="h-0.5 w-full rounded-full bg-background mb-2" />

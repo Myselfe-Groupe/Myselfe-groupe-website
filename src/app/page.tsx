@@ -1,5 +1,6 @@
 import BusinessCard from "@/components/cards/BusinessCard";
 import Button from "@/components/ui/Button";
+import ContactForm from "@/components/contact/ContactForm";
 
 export default function Home() {
   return (
@@ -19,9 +20,11 @@ export default function Home() {
               text-foreground, border-border et bg-muted.
             </p>
             <div className="flex flex-wrap gap-3">
-              <Button variant="primary" size="lg">
-                Notre histoire
-              </Button>
+              <a href="#namas-thes">
+                <Button variant="primary" size="lg">
+                  Nos entreprises
+                </Button>
+              </a>
             </div>
           </div>
         </main>
@@ -41,14 +44,10 @@ export default function Home() {
 
       <section id="contact" className="min-h-screen flex items-center">
         <div className="mx-auto w-full max-w-4xl px-6 py-20 sm:px-10 lg:px-12">
-          <h2 className="text-3xl font-semibold font-title">Contact</h2>
+          <h2 className="text-5xl font-semibold font-title">Contact</h2>
           <p className="mt-4 text-lg text-secondary">Entrons en contact — envoyez-nous un message.</p>
           <div className="mt-6">
-            <a href="mailto:contact@example.com" className="inline-block">
-              <Button variant="primary" size="lg">
-                Nous contacter
-              </Button>
-            </a>
+            <ContactForm />
           </div>
         </div>
       </section>
