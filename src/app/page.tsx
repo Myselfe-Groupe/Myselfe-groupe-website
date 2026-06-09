@@ -57,6 +57,14 @@ export default function Home() {
         <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <BusinessCard
             name="Namas'Thés"
+            tags={[
+              "Boulangerie",
+              "Pizzeria",
+              "Patisserie",
+              "Snacking",
+              "Chocolaterie",
+              "Salon de thé",
+            ]}
             description="Lorem Ipsum is simply dummy text of the printing and typesetting industry.
               Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"
             logoSrc="/images/vitrine-namasthes.jpeg"

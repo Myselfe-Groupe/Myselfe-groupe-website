@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 
 type BusinessCardProps = {
   name: string;
+  tags?: string[];
   description?: string;
   logoSrc?: string;
   website?: string;
@@ -14,6 +15,7 @@ type BusinessCardProps = {
 
 export default function BusinessCard({
   name,
+  tags,
   description,
   logoSrc,
   website,
@@ -78,10 +80,22 @@ export default function BusinessCard({
           >
             <h3 className="text-8xl text-background font-title">{name}</h3>
             <span className="h-0.5 w-full rounded-full bg-background mb-2" />
+            {tags && tags.length > 0 ? (
+              <div className="mt-2 flex flex-wrap gap-2">
+                {tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full border border-border/80 bg-primary/80 px-3 py-1 text-xs font-medium tracking-[0.18em] text-background"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            ) : null}
             {description ? (
               <motion.p
                 variants={descriptionVariants}
-                className="mt-3 text-md text-background max-w-2xl"
+                className="mt-3 max-w-2xl text-md text-background"
               >
                 {description}
               </motion.p>
