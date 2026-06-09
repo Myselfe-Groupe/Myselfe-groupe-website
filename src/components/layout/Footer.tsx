@@ -44,8 +44,8 @@ export default function Footer() {
 							<span aria-hidden="true" className="mt-0.5 text-border">
 								<PhoneIcon />
 							</span>
-							<a href="tel:+33123456789" className="hover:text-border transition-colors">
-								01 23 45 67 89
+							<a href="tel:+33555231016" className="hover:text-border transition-colors">
+								05 55 23 10 16
 							</a>
 						</li>
 					</ul>
@@ -78,10 +78,10 @@ export default function Footer() {
 				</div>
 
 				<div className="lg:justify-self-end">
-					<h3 className="text-xl text-background">Suivez-nous</h3>
+					<h3 className="text-xl text-background">Suivez-nous !</h3>
 					<div className="mt-4 flex items-center gap-4 text-border">
 						<a
-							href="https://www.instagram.com"
+							href="https://www.instagram.com/grp.myselfe/"
 							aria-label="Instagram"
 							target="_blank"
 							rel="noreferrer"
@@ -90,7 +90,7 @@ export default function Footer() {
 							<InstagramIcon />
 						</a>
 						<a
-							href="https://www.tiktok.com"
+							href="https://www.tiktok.com/@grp.myselfe"
 							aria-label="TikTok"
 							target="_blank"
 							rel="noreferrer"
@@ -104,7 +104,7 @@ export default function Footer() {
 			</div>
 
 			<div className="border-t border-border px-6 py-4 text-center text-sm text-background sm:px-10 lg:px-12">
-				<p><span className="font-semibold text-border">©</span> 2026 Namas&apos;thes. Tous droits reserves</p>
+				<p><span className="font-semibold text-border">©</span> 2026 MySelfe Groupe. Tous droits réservés</p>
 			</div>
 		</footer>
 	);
