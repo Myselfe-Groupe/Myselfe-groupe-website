@@ -25,9 +25,10 @@ export default function Navbar() {
 						<Link
 							key={link.label}
 							href={link.href}
-							className="text-sm font-medium text-background transition-colors hover:opacity-90"
+							className="relative inline-block pb-1 text-sm font-medium text-background transition-colors hover:opacity-90 group"
 						>
 							{link.label}
+							<span className="absolute left-0 bottom-0 h-[0.05rem] w-full origin-left scale-x-0 bg-current transition-transform duration-300 ease-out group-hover:scale-x-100 group-focus-visible:scale-x-100" />
 						</Link>
 					))}
 				</nav>
