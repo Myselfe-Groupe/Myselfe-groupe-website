@@ -2,14 +2,14 @@ import Link from "next/link";
 import Image from "next/image";
 
 const usefulLinks = [
-	{ label: "Accueil", href: "#accueil" },
-	{ label: "Namas'Thés", href: "#namas-thes" },
-	{ label: "Contact", href: "#contact" },
+	{ label: "Accueil", href: "/#accueil" },
+	{ label: "Namas'Thés", href: "/#namas-thes" },
+	{ label: "Contact", href: "/#contact" },
 ];
 
 const legalLinks = [
-	{ label: "Mentions legales", href: "#" },
-	{ label: "Gestion des cookies", href: "#" },
+	{ label: "Mentions légales", href: "/mentions-legales" },
+	{ label: "Politique de confidentialité", href: "/politique-de-confidentialite" },
 ];
 
 export default function Footer() {
