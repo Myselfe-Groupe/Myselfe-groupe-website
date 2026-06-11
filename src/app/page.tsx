@@ -88,7 +88,7 @@ export default function Home() {
             <p className="text-base font-medium uppercase tracking-[0.35em] text-secondary">
               Histoire du groupe
             </p>
-            <h2 className="font-title text-3xl leading-tight text-secondary sm:text-5xl">
+            <h2 className="font-title text-4xl leading-tight text-secondary sm:text-5xl">
               Une aventure humaine née d'un lieu de partage
             </h2>
             <p className="sm:text-lg leading-8 text-secondary">
