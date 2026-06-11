@@ -60,7 +60,7 @@ export default function BusinessCard({
   };
 
   const contentVariants = {
-    rest: { opacity: 0.8, y: 200 },
+    rest: { opacity: 1, y: 200 },
     hover: {
       opacity: 1,
       y: 0,
@@ -100,7 +100,7 @@ export default function BusinessCard({
               <span className="absolute inset-0 bg-black/20 rounded-lg" />
               <motion.span
                 variants={filterVariants}
-                className="absolute inset-0 bg-black/25 rounded-lg"
+                className="absolute inset-0 bg-black/35 rounded-lg"
               />
             </div>
           ) : null}
