@@ -25,7 +25,7 @@ export default function Footer() {
                 </div>
 				<div>
 					<h3 className="text-xl text-background">Contact</h3>
-					<ul className="mt-4 space-y-2.5 text-sm text-background">
+					<ul className="mt-4 space-y-2.5 text-xs text-background">
 						<li className="flex items-start gap-2.5">
 							<span aria-hidden="true" className="mt-0.5 text-border">
 								<MapPinIcon />
@@ -53,7 +53,7 @@ export default function Footer() {
 
 				<div>
 					<h3 className="text-xl text-background">Liens utiles</h3>
-					<ul className="mt-4 space-y-2 text-sm text-background">
+					<ul className="mt-4 space-y-2 text-xs text-background">
 						{usefulLinks.map((link) => (
 							<li key={link.label}>
 								<Link href={link.href} className="hover:text-border transition-colors">
@@ -66,7 +66,7 @@ export default function Footer() {
 
 				<div>
 					<h3 className="text-xl text-background">Informations</h3>
-					<ul className="mt-4 space-y-2 text-sm text-background">
+					<ul className="mt-4 space-y-2 text-xs text-background">
 						{legalLinks.map((link) => (
 							<li key={link.label}>
 								<Link href={link.href} className="hover:text-border transition-colors">
@@ -103,7 +103,7 @@ export default function Footer() {
 
 			</div>
 
-			<div className="border-t border-border px-6 py-4 text-center text-sm text-background sm:px-10 lg:px-12">
+			<div className="border-t border-border px-6 py-4 text-center text-xs text-background sm:px-10 lg:px-12">
 				<p><span className="font-semibold text-border">©</span> 2026 MySelfe Groupe. Tous droits réservés</p>
 			</div>
 		</footer>
