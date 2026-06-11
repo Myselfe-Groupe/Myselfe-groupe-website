@@ -35,10 +35,10 @@ export default function Home() {
               <h1 className="font-title text-3xl font tracking-wide text-foreground sm:text-5xl">
                 Le parcours de Myselfe Groupe, une aventure entrepreneuriale inspirante
               </h1>
-              <p className="max-w-xl text-sm sm:text-md leading-7 text-secondary">
+              <p className="max-w-xl text-sm sm:text-base leading-7 text-secondary">
                 Le Groupe Myselfe est né d'une ambition simple mais profondément humaine : créer des lieux où l'on se sent bien, où l'on prend le temps de vivre, d'échanger et de se retrouver.
               </p>
-              <p className="max-w-xl text-sm sm:text-md leading-7 text-secondary">
+              <p className="max-w-xl text-sm sm:text-base leading-7 text-secondary">
                 À l'origine de cette aventure se trouve Alexandra Verlhac, une entrepreneuse passionnée qui n'a jamais eu peur des défis. Toujours guidée par ses convictions et son envie d'aller plus loin, elle a imaginé un concept centré sur l'humain, le partage et la convivialité.
               </p>
               <div className="flex flex-wrap gap-3">
@@ -65,8 +65,7 @@ export default function Home() {
               "Chocolaterie",
               "Salon de thé",
             ]}
-            description="Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"
+            description="Namas'Thés est bien plus qu'une simple boulangerie ou pizzeria. C'est un véritable lieu de vie, un espace où l'on peut faire une pause, savourer un moment de détente et créer du lien. Chaque détail a été pensé pour offrir une expérience unique, alliant qualité, convivialité et authenticité."
             logoSrc="/images/vitrine-namasthes.jpeg"
             website="https://namas-thes.com"
           />
@@ -116,7 +115,7 @@ export default function Home() {
               </div>
               <aside className="sm:w-1/3 space-y-4 sm:space-y-6">
                 <div className="rounded-2xl border border-border/80 bg-primary p-6 text-background shadow-[0_20px_80px_rgba(31,43,91,0.14)]">
-                  <p className="text-md font-medium uppercase tracking-[0.3em] text-border">
+                  <p className="text-base font-medium uppercase tracking-[0.3em] text-border">
                     En bref
                   </p>
                   <ul className="mt-6 space-y-4">
@@ -166,7 +165,7 @@ export default function Home() {
       <section id="contact" className="min-h-screen flex items-center bg-muted">
         <div className="mx-auto w-full max-w-4xl px-6 py-20 sm:px-10 lg:px-12">
           <h2 className="text-5xl font-semibold font-title">Contact</h2>
-          <p className="mt-4 text-md sm:text-lg text-secondary">Entrons en contact — envoyez-nous un message.</p>
+          <p className="mt-4 text-base sm:text-lg text-secondary">Entrons en contact — envoyez-nous un message.</p>
           <div className="mt-6">
             <ContactForm />
           </div>

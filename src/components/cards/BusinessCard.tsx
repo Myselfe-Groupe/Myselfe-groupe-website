@@ -78,7 +78,7 @@ export default function BusinessCard({
   };
 
   return (
-    <div className="min-h-[75vh] md:min-h-[85vh] w-full h-full flex items-center justify-center px-4 sm:py-10 sm:px-6">
+    <div className="min-h-[55vh] md:min-h-[85vh] w-full h-full flex items-center justify-center px-4 sm:py-10 sm:px-6">
       <motion.article
         initial="rest"
         animate={canHover ? "rest" : isRevealed ? "hover" : "rest"}
@@ -87,7 +87,7 @@ export default function BusinessCard({
         variants={cardVariants}
         className="w-full max-w-4xl rounded-2xl border border-border bg-white/5 p-4 sm:p-8 sm:pt-44 shadow-lg backdrop-blur-md overflow-hidden cursor-pointer md:cursor-default"
       >
-        <div className="flex flex-col gap-8 md:flex-row md:items-center">
+        <div className="flex flex-col gap-8 md:flex-row md:items-center h-110 sm:h-full">
           {logoSrc ? (
             <div className="shrink-0">
               <Image
@@ -126,7 +126,7 @@ export default function BusinessCard({
             {description ? (
               <motion.p
                 variants={descriptionVariants}
-                className="mt-3 max-w-2xl text-md text-background"
+                className="mt-3 max-w-2xl text-sm sm:text-base text-background line-clamp-6"
               >
                 {description}
               </motion.p>
