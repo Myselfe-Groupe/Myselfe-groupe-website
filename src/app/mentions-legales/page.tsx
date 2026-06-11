@@ -77,7 +77,7 @@ export default function MentionsLegalesPage() {
 						Mentions légales
 					</h1>
 					<p className="mt-6 max-w-3xl text-base leading-8 text-background/85 sm:text-base">
-						Conformément aux dispositions de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (LCEN), il est porté à la connaissance des utilisateurs du site <a href="https://myselfe-groupe.fr" className="text-background hover:underline">myselfe-groupe.fr</a> les présentes mentions légales.
+						Conformément aux dispositions de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique (LCEN), il est porté à la connaissance des utilisateurs du site <a href="https://myselfe-groupe.com" className="text-background hover:underline">myselfe-groupe.com</a> les présentes mentions légales.
 					</p>
                     <p className="mt-4 max-w-3xl text-base leading-8 text-background/85 sm:text-base">
                         La connexion et la navigation sur le site par l’utilisateur impliquent acceptation intégrale et sans réserve des présentes mentions légales.
