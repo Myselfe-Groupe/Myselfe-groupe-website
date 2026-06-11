@@ -164,7 +164,7 @@ export default function Home() {
 
       <section id="contact" className="min-h-screen flex items-center bg-muted">
         <div className="mx-auto w-full max-w-4xl px-6 py-20 sm:px-10 lg:px-12">
-          <h2 className="text-5xl font-semibold font-title">Contact</h2>
+          <h2 className="text-5xl font-title text-secondary">Contact</h2>
           <p className="mt-4 text-base sm:text-lg text-secondary">Entrons en contact — envoyez-nous un message.</p>
           <div className="mt-6">
             <ContactForm />
