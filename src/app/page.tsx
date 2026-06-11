@@ -29,10 +29,10 @@ export default function Home() {
               className="aspect-square w-40 sm:w-1/3 rounded-full object-cover border-secondary border shadow-lg z-10"
             />
             <div className="max-w-2xl space-y-6 z-10">
-              <p className="text-sm font-medium uppercase tracking-[0.35em] text-secondary">
+              <p className="text-base font-medium uppercase tracking-[0.35em] text-secondary">
                 Histoire
               </p>
-              <h1 className="font-title text-3xl font tracking-wide text-foreground sm:text-5xl">
+              <h1 className="font-title text-4xl font tracking-wide text-secondary sm:text-5xl">
                 Le parcours de Myselfe Groupe, une aventure entrepreneuriale inspirante
               </h1>
               <p className="max-w-xl text-sm sm:text-base leading-7 text-secondary">
