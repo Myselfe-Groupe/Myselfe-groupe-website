@@ -85,10 +85,10 @@ export default function Home() {
       <section id="notre-histoire" className="relative overflow-hidden py-20 sm:py-24">
         <div className="relative flex flex-row mx-auto w-full max-w-6xl gap-8 px-6 sm:px-10 lg:px-12">
           <div className="space-y-6">
-            <p className="text-sm font-medium uppercase tracking-[0.35em] text-secondary">
+            <p className="text-base font-medium uppercase tracking-[0.35em] text-secondary">
               Histoire du groupe
             </p>
-            <h2 className="font-title text-4xl leading-tight text-foreground sm:text-5xl">
+            <h2 className="font-title text-3xl leading-tight text-secondary sm:text-5xl">
               Une aventure humaine née d'un lieu de partage
             </h2>
             <p className="sm:text-lg leading-8 text-secondary">
@@ -97,19 +97,19 @@ export default function Home() {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="sm:w-2/3 space-y-6 rounded-2xl border border-border bg-white/60 p-6 sm:p-8 shadow-[0_20px_80px_rgba(31,43,91,0.08)] backdrop-blur-sm md:p-10">
-                <p className="text-sm leading-7 text-foreground/90">
+                <p className="text-sm leading-7 text-secondary">
                   Tout a commencé avec l'ouverture de la boulangerie-pâtisserie-pizzeria Namas'Thés. Plus qu'un commerce, ce lieu a été pensé comme un véritable espace de vie, où chacun peut faire une pause, respirer, savourer un moment de détente et créer du lien. Rapidement, ce premier projet est devenu le point de départ d'une aventure bien plus vaste.
                 </p>
-                <p className="text-sm leading-7 text-foreground/90">
+                <p className="text-sm leading-7 text-secondary">
                   Car derrière Namas'Thés se dessine une vision plus grande : celle d'un univers qui rassemble, qui rapproche les personnes et qui offre une expérience humaine à part entière. Pour Alexandra Verlhac, entreprendre ne consiste pas seulement à développer des activités, mais à créer des lieux porteurs de sens, où l'accueil, la qualité et l'authenticité occupent une place centrale.
                 </p>
-                <p className="text-sm leading-7 text-foreground/90">
+                <p className="text-sm leading-7 text-secondary">
                   Cette aventure n'aurait cependant pas la même saveur sans les femmes et les hommes qui l'accompagnent au quotidien. Entourée d'une équipe engagée, passionnée et prête à la suivre dans ses idées parfois audacieuses, Alexandra construit chaque jour un projet collectif fondé sur la confiance, l'enthousiasme et l'envie d'innover.
                 </p>
-                <p className="text-sm leading-7 text-foreground/90">
+                <p className="text-sm leading-7 text-secondary">
                   Aujourd'hui, le Groupe Myselfe poursuit son développement avec la même énergie qu'à ses débuts. Entre nouveaux projets, nouvelles expériences et nouvelles façons de créer du lien, l'histoire ne fait que commencer.
                 </p>
-                <p className="text-sm leading-7 text-foreground/90">
+                <p className="text-sm leading-7 text-secondary">
                   Et si une chose est certaine, c'est que Alexandra Verlhac et son équipe vous réservent encore de belles surprises pour l'avenir. Car le Groupe Myselfe est avant tout une aventure en mouvement, portée par une conviction forte : les plus beaux projets sont ceux qui réunissent les personnes autour de moments sincères et mémorables.
                 </p>
               </div>

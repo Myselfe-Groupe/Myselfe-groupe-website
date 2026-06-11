@@ -109,8 +109,8 @@ export default function BusinessCard({
             variants={contentVariants}
             className="flex flex-1 flex-col justify-end self-end z-10"
           >
-            <h3 className="text-5xl sm:text-8xl text-white font-title">{name}</h3>
-            <span className="h-0.5 w-full rounded-full bg-white mb-2" />
+            <h3 className="text-5xl sm:text-8xl text-background font-title">{name}</h3>
+            <span className="h-0.5 w-full rounded-full bg-background mb-2" />
             {tags && tags.length > 0 ? (
               <div className="mt-2 flex flex-wrap gap-2">
                 {tags.map((tag) => (
