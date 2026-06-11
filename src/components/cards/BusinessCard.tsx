@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Button from "@/components/ui/Button";
 import { motion } from "framer-motion";
@@ -21,6 +22,33 @@ export default function BusinessCard({
   website,
   ctaLabel = "Visiter le site",
 }: BusinessCardProps) {
+  const [canHover, setCanHover] = useState(false);
+  const [isRevealed, setIsRevealed] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+
+    const updateHoverCapability = () => {
+      setCanHover(mediaQuery.matches);
+      if (mediaQuery.matches) {
+        setIsRevealed(false);
+      }
+    };
+
+    updateHoverCapability();
+    mediaQuery.addEventListener("change", updateHoverCapability);
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateHoverCapability);
+    };
+  }, []);
+
+  const handleCardTap = () => {
+    if (!canHover) {
+      setIsRevealed(!isRevealed);
+    }
+  };
+
   const cardVariants = {
     rest: {},
     hover: {},
@@ -50,13 +78,14 @@ export default function BusinessCard({
   };
 
   return (
-    <div className="min-h-[75vh] md:min-h-[85vh] w-full h-full flex items-center justify-center px-4 py-10 sm:px-6">
+    <div className="min-h-[75vh] md:min-h-[85vh] w-full h-full flex items-center justify-center px-4 sm:py-10 sm:px-6">
       <motion.article
         initial="rest"
-        animate="rest"
-        whileHover="hover"
+        animate={canHover ? "rest" : isRevealed ? "hover" : "rest"}
+        whileHover={canHover ? "hover" : undefined}
+        onClick={handleCardTap}
         variants={cardVariants}
-        className="w-full max-w-4xl rounded-2xl border border-border bg-white/5 p-8 pt-44 shadow-lg backdrop-blur-md overflow-hidden"
+        className="w-full max-w-4xl rounded-2xl border border-border bg-white/5 p-4 sm:p-8 sm:pt-44 shadow-lg backdrop-blur-md overflow-hidden cursor-pointer md:cursor-default"
       >
         <div className="flex flex-col gap-8 md:flex-row md:items-center">
           {logoSrc ? (
@@ -67,6 +96,8 @@ export default function BusinessCard({
                 fill={true}
                 className="rounded-lg object-cover absolute"
               />
+              {/* Overlay à enlever lors de l'ajout des vrais photos */}
+              <span className="absolute inset-0 bg-black/20 rounded-lg" />
               <motion.span
                 variants={filterVariants}
                 className="absolute inset-0 bg-black/25 rounded-lg"
@@ -78,8 +109,8 @@ export default function BusinessCard({
             variants={contentVariants}
             className="flex flex-1 flex-col justify-end self-end z-10"
           >
-            <h3 className="text-8xl text-background font-title">{name}</h3>
-            <span className="h-0.5 w-full rounded-full bg-background mb-2" />
+            <h3 className="text-5xl sm:text-8xl text-white font-title">{name}</h3>
+            <span className="h-0.5 w-full rounded-full bg-white mb-2" />
             {tags && tags.length > 0 ? (
               <div className="mt-2 flex flex-wrap gap-2">
                 {tags.map((tag) => (

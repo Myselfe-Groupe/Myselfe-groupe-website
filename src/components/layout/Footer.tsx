@@ -16,7 +16,7 @@ export default function Footer() {
 	return (
 		<footer className="mt-auto border-t-2 border-border bg-primary text-background">
 			<div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-10 px-6 py-12 sm:px-6 lg:grid-cols-[1.15fr_1fr_1fr_1fr_auto] lg:items-start lg:gap-12 lg:px-6">
-                <div className="relative h-40 w-40">
+                <div className="relative h-40 w-40 mx-auto lg:mx-0">
                     <Image
                         src="/logo/MyselfeGroupeLogo.png"
                         alt="Myselfe Groupe"
