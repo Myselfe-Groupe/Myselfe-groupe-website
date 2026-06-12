@@ -3,7 +3,8 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Quando, Great_Vibes } from "next/font/google";
 import "./globals.css";
-import { Analytics } from "@vercel/analytics/react";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const quando = Quando({
   variable: "--font-quando",
@@ -42,6 +43,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
