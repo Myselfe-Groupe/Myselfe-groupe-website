@@ -1,37 +1,55 @@
+// middleware.ts
 import { createServerClient } from "@supabase/ssr";
-import { type NextRequest, NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
-
-export const createClient = (request: NextRequest) => {
-  // Create an unmodified response
-  let supabaseResponse = NextResponse.next({
-    request: {
-      headers: request.headers,
-    },
-  });
+export async function middleware(req: NextRequest) {
+  let res = NextResponse.next();
 
   const supabase = createServerClient(
-    supabaseUrl!,
-    supabaseKey!,
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
     {
       cookies: {
-        getAll() {
-          return request.cookies.getAll()
-        },
-        setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value))
-          supabaseResponse = NextResponse.next({
-            request,
-          })
-          cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
-          )
+        getAll: () => req.cookies.getAll(),
+        setAll: (cookiesToSet) => {
+          cookiesToSet.forEach(({ name, value, options }) => {
+            res.cookies.set(name, value, options);
+          });
         },
       },
-    },
+    }
   );
 
-  return supabaseResponse
+  // 🔐 récupère l'utilisateur
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  const path = req.nextUrl.pathname;
+  const isAdminRoute = path.startsWith("/admin");
+
+  // ❌ pas connecté → login
+  if (isAdminRoute && !user) {
+    return NextResponse.redirect(new URL("/login", req.url));
+  }
+
+  // 👮 connecté mais pas admin → home
+  if (isAdminRoute && user) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", user.id)
+      .single();
+
+    if (profile?.role !== "admin") {
+      return NextResponse.redirect(new URL("/", req.url));
+    }
+  }
+
+  return res;
+}
+
+// ⚡ important : limiter le middleware uniquement à /admin
+export const config = {
+  matcher: ["/admin/:path*"],
 };

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
+import AppShell from "@/components/layout/AppShell";
 import { Quando, Great_Vibes } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
@@ -39,9 +38,7 @@ export default function RootLayout({
       className={`${quando.variable} ${great_Vibes.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar />
-        {children}
-        <Footer />
+        <AppShell>{children}</AppShell>
         <Analytics />
         <SpeedInsights />
       </body>
