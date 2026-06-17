@@ -41,12 +41,53 @@ export default function CompaniesPage() {
 
     if (!confirmed) return;
 
-    await supabase
-      .from("companies")
-      .delete()
-      .eq("id", id);
+    try {
+      // 1. Récupérer les infos de l'entreprise (notamment le logo) AVANT la suppression
+      const { data: companyData, error: fetchError } = await supabase
+        .from("companies")
+        .select("logo_url")
+        .eq("id", id)
+        .single();
 
-    fetchCompanies();
+      if (fetchError) {
+        console.error("Erreur lors de la récupération de l'entreprise avant suppression:", fetchError);
+      }
+
+      // 2. Supprimer l'entreprise de la base de données PostgreSQL
+      const { error: deleteError } = await supabase
+        .from("companies")
+        .delete()
+        .eq("id", id);
+
+      if (deleteError) throw deleteError;
+
+      // 3. Si l'entreprise avait un logo, on le supprime du bucket Storage
+      if (companyData?.logo_url) {
+        // On nettoie l'URL des éventuels paramètres de cache (?v=...)
+        const urlWithoutParams = companyData.logo_url.split("?")[0];
+        const parts = urlWithoutParams.split("/");
+        const fileNameToDelete = parts[parts.length - 1];
+
+        if (fileNameToDelete) {
+          const { error: storageError } = await supabase.storage
+            .from("companies")
+            .remove([fileNameToDelete]);
+
+          if (storageError) {
+            console.error("Erreur lors de la suppression de l'image du bucket:", storageError);
+          } else {
+            console.log("Image associée supprimée du bucket avec succès !");
+          }
+        }
+      }
+
+      // 4. Rafraîchir la liste des entreprises à l'écran
+      fetchCompanies();
+
+    } catch (error) {
+      console.error("Erreur globale lors de la suppression:", error);
+      alert("Une erreur est survenue lors de la suppression de l'entreprise.");
+    }
   }
 
   if (loading) {

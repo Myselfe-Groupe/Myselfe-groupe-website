@@ -83,16 +83,14 @@ export default function EditCompanyPage() {
             let finalLogoUrl = logoUrl;
 
             if (image) {
-                // Supprime l'ancien logo
                 if (logoUrl) {
-                    // Découpe l'URL pour ne garder que la toute fin (le nom du fichier)
                     const parts = logoUrl.split("/");
                     const fileNameToDelete = parts[parts.length - 1];
 
                     if (fileNameToDelete) {
                         const { error: deleteError } = await supabase.storage
                             .from("companies")
-                            .remove([fileNameToDelete]); // Supabase attend juste ['nom-du-fichier.ext']
+                            .remove([fileNameToDelete]);
 
                         if (deleteError) {
                             console.error(
