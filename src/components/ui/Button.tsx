@@ -1,6 +1,6 @@
 import React from "react";
 
-type Variant = "primary" | "secondary" | "outline";
+type Variant = "primary" | "secondary" | "outline" | "destructive";
 type Size = "sm" | "md" | "lg";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -18,7 +18,9 @@ const variantMap: Record<Variant, string> = {
   secondary:
     "bg-secondary text-background",
   outline:
-    "bg-transparent text-background border border-border",
+    "bg-transparent text-background border border-background",
+  destructive:
+    "border bg-red-700/70 text-background focus:ring-2 focus:ring-red-500 focus:ring-offset-2 disabled:opacity-50",
 };
 
 const sizeMap: Record<Size, string> = {

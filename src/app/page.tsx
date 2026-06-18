@@ -2,13 +2,37 @@ import BusinessCard from "@/components/cards/BusinessCard";
 import Button from "@/components/ui/Button";
 import ContactForm from "@/components/contact/ContactForm";
 import Image from "next/image";
+import { createClient } from '@/utils/supabase/server';
+import { cookies } from "next/headers";
+
+type CompaniesItem = {
+  id: string;
+  name: string | null;
+  description: string | null;
+  website: string | null;
+  logo_url: string | null;
+  tags: string[] | null;
+  created_at: string | null;
+};
+
 
 export const metadata = {
   title: "MySelfe Groupe - Accueil",
   description: "Découvrez l'histoire inspirante de MySelfe Groupe, une entreprise familiale passionnée par l'entrepreneuriat et la création de marques uniques. Explorez notre parcours, nos valeurs et nos entreprises, notamment Namas'Thés, un lieu d'exception regroupant Boulangerie, Pizzeria, Patisserie, Snacking, Chocolaterie et Salon de thé. Rejoignez-nous dans cette aventure entrepreneuriale et découvrez comment nous transformons nos passions en succès.",
 };
 
-export default function Home() {
+export default async function Home() {
+  const cookieStore = cookies();
+
+  const supabase = createClient(await cookieStore);
+
+  const { data: companiesData } = await supabase
+    .from("companies")
+    .select("id, name, description, website, logo_url, tags, created_at")
+    .order("created_at", { ascending: false });
+
+  const companies: CompaniesItem[] = (companiesData ?? []) as CompaniesItem[];
+
   return (
     <div className="flex flex-col bg-background text-foreground">
       <section id="accueil" className="min-h-screen flex items-start">
@@ -55,30 +79,25 @@ export default function Home() {
 
       <section id="namas-thes" className="min-h-screen flex items-center bg-muted">
         <div className="mx-auto w-full max-w-7xl px-2 py-10 sm:px-6 lg:px-8 space-y-10">
-          <BusinessCard
-            name="Namas'Thés"
-            tags={[
-              "Boulangerie",
-              "Pizzeria",
-              "Patisserie",
-              "Snacking",
-              "Chocolaterie",
-              "Salon de thé",
-            ]}
-            description="Namas'Thés est bien plus qu'une simple boulangerie ou pizzeria. C'est un véritable lieu de vie, un espace où l'on peut faire une pause, savourer un moment de détente et créer du lien. Chaque détail a été pensé pour offrir une expérience unique, alliant qualité, convivialité et authenticité."
-            logoSrc="/images/vitrine-namasthes.jpeg"
-            website="https://namas-thes.com"
-          />
-          <BusinessCard
-            name="A venir..."
-            tags={[
-              "Salle d'Arcade",
-            ]}
-            description="Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"
-            logoSrc="/images/vitrine-namasthes.jpeg"
-            website="https://namas-thes.com"
-          />
+          {!companies.length && (
+            <div className="mt-20 rounded-lg border border-secondary/60 bg-secondary/40 px-4 py-6 text-muted-foreground">
+              Aucune entreprise disponible.
+            </div>
+          )}
+          {companies.length > 0 &&
+            companies.map((item) => {
+              return (
+                <BusinessCard
+                  key={item.id}
+                  name={item.name ?? "Sans titre"}
+                  description={item.description ?? ""}
+                  tags={item.tags ?? []}
+                  logoSrc={item.logo_url ?? "/"}
+                  website={item.website ?? "/"}
+                />
+              )
+            })
+          }
         </div>
       </section>
 

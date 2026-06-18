@@ -31,7 +31,7 @@ export default async function AdminLayout({
     }
 
     return (
-        <div className="min-h-screen bg-background text-foreground lg:flex">
+        <div className="min-h-screen bg-muted text-foreground lg:flex">
             <AdminSidebar email={user.email ?? "Admin"} />
             <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
                 {children}

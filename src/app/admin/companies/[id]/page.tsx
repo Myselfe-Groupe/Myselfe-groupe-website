@@ -5,15 +5,6 @@ import { createClient } from "@/utils/supabase/client";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 
-interface Company {
-    id: string;
-    name: string;
-    description: string;
-    website: string;
-    logo_url: string;
-    tags: string[];
-}
-
 export default function EditCompanyPage() {
     const supabase = createClient();
     const router = useRouter();
@@ -281,7 +272,7 @@ export default function EditCompanyPage() {
                                 onClick={() =>
                                     removeTag(tag)
                                 }
-                                className="rounded-full bg-muted px-3 py-1"
+                                className="rounded-full bg-primary/80 text-background border border-border px-3 py-1"
                             >
                                 {tag} ✕
                             </button>

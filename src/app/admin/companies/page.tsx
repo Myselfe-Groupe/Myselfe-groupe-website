@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import Image from "next/image";
 import Link from "next/link";
+import Button from "@/components/ui/Button";
 
 interface Company {
   id: string;
@@ -107,17 +108,14 @@ export default function CompaniesPage() {
           </p>
         </div>
 
-        <button
-          className="rounded-lg bg-primary px-4 py-2 text-white"
-        >
-          <a href="/admin/companies/create">
+        <Button variant="primary" size="lg">
+          <Link href="/admin/companies/create">
             Ajouter une entreprise
-          </a>
-        </button>
-
+          </Link>
+        </Button>
       </div>
 
-      <div className="overflow-hidden rounded-xl border">
+      <div className="overflow-hidden rounded-lg border">
         <table className="w-full">
           <thead className="bg-muted">
             <tr>
@@ -155,7 +153,7 @@ export default function CompaniesPage() {
                       className="rounded-lg object-cover"
                     />
                     <div className="space-y-1">
-                      <p className="font-medium">
+                      <p className="font-medium underline underline-offset-2">
                         {company.name}
                       </p>
                       <p className="line-clamp-2 text-sm text-muted-foreground">
@@ -165,7 +163,7 @@ export default function CompaniesPage() {
                   </div>
                 </td>
 
-                <td className="p-4">
+                <td className="p-4 text-sm">
                   {company.website}
                 </td>
 
@@ -174,7 +172,7 @@ export default function CompaniesPage() {
                     {company.tags?.map((tag) => (
                       <span
                         key={tag}
-                        className="rounded-full bg-muted px-3 py-1 text-xs"
+                        className="rounded-full bg-primary/80 text-background px-3 py-1 text-xs border border-border"
                       >
                         {tag}
                       </span>
@@ -183,22 +181,22 @@ export default function CompaniesPage() {
                 </td>
 
                 <td className="p-4">
-                  <div className="flex justify-end gap-2">
-                    <Link
-                      href={`/admin/companies/${company.id}`}
-                      className="rounded-lg border px-3 py-2"
-                    >
-                      Modifier
-                    </Link>
-
-                    <button
+                  <div className="flex flex-col justify-end gap-2">
+                    <Button variant="primary">
+                      <Link href={`/admin/companies/${company.id}`}>
+                        Modifier
+                      </Link>
+                    </Button>
+                    <Button
+                      variant="destructive"
                       onClick={() =>
                         deleteCompany(company.id)
                       }
-                      className="rounded-lg border border-red-500 px-3 py-2 text-red-500"
                     >
-                      Supprimer
-                    </button>
+                      <Link href={`/admin/companies/${company.id}`}>
+                        Supprimer
+                      </Link>
+                    </Button>
                   </div>
                 </td>
               </tr>
