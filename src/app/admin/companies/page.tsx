@@ -108,11 +108,11 @@ export default function CompaniesPage() {
           </p>
         </div>
 
-        <Button variant="primary" size="lg">
-          <Link href="/admin/companies/create">
+        <Link href="/admin/companies/create">
+          <Button variant="primary" size="lg">
             Ajouter une entreprise
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       </div>
 
       <div className="overflow-hidden rounded-lg border">
@@ -182,20 +182,19 @@ export default function CompaniesPage() {
 
                 <td className="p-4">
                   <div className="flex flex-col justify-end gap-2">
-                    <Button variant="primary">
-                      <Link href={`/admin/companies/${company.id}`}>
+                    <Link href={`/admin/companies/${company.id}`}>
+                      <Button variant="primary" className="w-full">
                         Modifier
-                      </Link>
-                    </Button>
+                      </Button>
+                    </Link>
                     <Button
+                      className="w-full"
                       variant="destructive"
                       onClick={() =>
                         deleteCompany(company.id)
                       }
                     >
-                      <Link href={`/admin/companies/${company.id}`}>
-                        Supprimer
-                      </Link>
+                      Supprimer
                     </Button>
                   </div>
                 </td>

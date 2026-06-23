@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import Button from "@/components/ui/Button";
 
 export default function CreateCompanyPage() {
   const supabase = createClient();
@@ -19,6 +21,11 @@ export default function CreateCompanyPage() {
 
   const [image, setImage] = useState<File | null>(null);
 
+  const [isDragging, setIsDragging] = useState(false);
+  const [preview, setPreview] = useState<string | null>(
+    null
+  );
+
   const addTag = () => {
     const value = tagInput.trim();
 
@@ -30,6 +37,15 @@ export default function CreateCompanyPage() {
 
   const removeTag = (tag: string) => {
     setTags((prev) => prev.filter((t) => t !== tag));
+  };
+
+  const handleFile = (file: File) => {
+    if (!file.type.startsWith("image/")) {
+      return;
+    }
+
+    setImage(file);
+    setPreview(URL.createObjectURL(file));
   };
 
   async function handleSubmit(
@@ -92,8 +108,8 @@ export default function CreateCompanyPage() {
 
   return (
     <div className="mx-auto max-w-4xl">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold">
+      <div className="space-y-2">
+        <h1 className="text-3xl uppercase tracking-[0.15em] underline underline-offset-3">
           Nouvelle entreprise
         </h1>
 
@@ -157,15 +173,80 @@ export default function CreateCompanyPage() {
             Image
           </label>
 
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) =>
-              setImage(
-                e.target.files?.[0] ?? null
-              )
-            }
-          />
+          <div
+            onDragOver={(e) => {
+              e.preventDefault();
+              setIsDragging(true);
+            }}
+            onDragLeave={() => {
+              setIsDragging(false);
+            }}
+            onDrop={(e) => {
+              e.preventDefault();
+              setIsDragging(false);
+
+              const file = e.dataTransfer.files?.[0];
+              handleFile(file);
+
+              if (file && file.type.startsWith("image/")) {
+                setImage(file);
+              }
+            }}
+            className={`
+              flex h-40 cursor-pointer items-center justify-center
+              rounded-lg border-2 border-dashed transition-colors
+              ${isDragging
+                ? "border-primary bg-primary/5"
+                : "border-muted-foreground/25"
+              }
+            `}
+          >
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              id="image-upload"
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+
+                if (file) {
+                  handleFile(file);
+                }
+                setImage(e.target.files?.[0] ?? null)
+              }}
+            />
+
+            <label
+              htmlFor="image-upload"
+              className="flex h-full w-full cursor-pointer items-center justify-center"
+            >
+              {preview ? (
+                <div className="text-center space-y-2">
+                  <Image
+                    src={preview}
+                    alt="Preview"
+                    width={120}
+                    height={120}
+                    className="mx-auto rounded-lg object-cover"
+                  />
+
+                  <p className="text-sm text-muted-foreground">
+                    Cliquez ou déposez une autre image
+                  </p>
+                </div>
+              ) : (
+                <div className="text-center">
+                  <p className="font-medium">
+                    Glissez-déposez votre image ici
+                  </p>
+
+                  <p className="text-sm text-muted-foreground">
+                    ou cliquez pour sélectionner un fichier
+                  </p>
+                </div>
+              )}
+            </label>
+          </div>
         </div>
 
         <div>
@@ -185,7 +266,7 @@ export default function CreateCompanyPage() {
             <button
               type="button"
               onClick={addTag}
-              className="rounded-lg border px-4"
+              className="rounded-lg border px-4 bg-primary text-background transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 cursor-pointer"
             >
               Ajouter
             </button>
@@ -199,7 +280,7 @@ export default function CreateCompanyPage() {
                 onClick={() =>
                   removeTag(tag)
                 }
-                className="rounded-full bg-muted px-3 py-1 text-sm"
+                className="rounded-full bg-primary/80 text-background border border-border px-3 py-1 cursor-pointer transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
               >
                 {tag} ✕
               </button>
@@ -208,24 +289,24 @@ export default function CreateCompanyPage() {
         </div>
 
         <div className="flex justify-end gap-4">
-          <button
+          <Button
+            variant="secondary"
             type="button"
             onClick={() =>
               router.push("/admin/companies")
             }
-            className="rounded-lg border px-4 py-2"
+            className=""
           >
             Annuler
-          </button>
+          </Button>
 
-          <button
+          <Button
             disabled={loading}
-            className="rounded-lg bg-primary px-4 py-2 text-white"
           >
             {loading
               ? "Création..."
               : "Créer l'entreprise"}
-          </button>
+          </Button>
         </div>
       </form>
     </div>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import LogoutButton from "@/components/admin/LogoutButton";
+import Button from "../ui/Button";
 
 const navItems = [
   { href: "/admin", label: "Vue d'ensemble" },
@@ -21,7 +22,7 @@ export default function AdminSidebar({
           <p className="text-xs font-medium uppercase tracking-[0.35em] text-border mt-6">
             Compte connecté
           </p>
-          <p className="mt-3 break-all text-sm font-semibold text-background">
+          <p className="mt-3 break-all text-sm text-background">
             {email}
           </p>
         </div>

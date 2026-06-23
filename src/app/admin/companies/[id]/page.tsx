@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
+import Button from "@/components/ui/Button";
+import Link from "next/link";
 
 export default function EditCompanyPage() {
     const supabase = createClient();
@@ -24,6 +26,11 @@ export default function EditCompanyPage() {
     const [tagInput, setTagInput] = useState("");
 
     const [image, setImage] = useState<File | null>(null);
+
+    const [isDragging, setIsDragging] = useState(false);
+    const [preview, setPreview] = useState<string | null>(
+        null
+    );
 
     useEffect(() => {
         fetchCompany();
@@ -62,6 +69,15 @@ export default function EditCompanyPage() {
     function removeTag(tag: string) {
         setTags(tags.filter((t) => t !== tag));
     }
+
+    const handleFile = (file: File) => {
+        if (!file.type.startsWith("image/")) {
+            return;
+        }
+
+        setImage(file);
+        setPreview(URL.createObjectURL(file));
+    };
 
     async function handleSubmit(
         e: React.FormEvent<HTMLFormElement>
@@ -151,9 +167,9 @@ export default function EditCompanyPage() {
     }
 
     return (
-        <div className="mx-auto max-w-4xl">
-            <div className="mb-8">
-                <h1 className="text-3xl font-bold">
+        <div className="mx-auto max-w-4xl relative">
+            <div className="mb-8 space-y-2">
+                <h1 className="text-3xl uppercase tracking-[0.15em] underline underline-offset-3">
                     Modifier l'entreprise
                 </h1>
 
@@ -209,40 +225,102 @@ export default function EditCompanyPage() {
                     />
                 </div>
 
-                {logoUrl && (
-                    <div>
-                        <label className="mb-2 block">
-                            Logo actuel
-                        </label>
-
-                        <Image
-                            src={logoUrl}
-                            alt={name}
-                            width={120}
-                            height={120}
-                            className="rounded-lg border"
-                        />
-                    </div>
-                )}
-
                 <div>
                     <label className="mb-2 block">
                         Remplacer le logo
                     </label>
 
-                    <input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) =>
-                            setImage(
-                                e.target.files?.[0] ?? null
-                            )
-                        }
-                    />
+                    <div
+                        onDragOver={(e) => {
+                            e.preventDefault();
+                            setIsDragging(true);
+                        }}
+                        onDragLeave={() => {
+                            setIsDragging(false);
+                        }}
+                        onDrop={(e) => {
+                            e.preventDefault();
+                            setIsDragging(false);
+
+                            const file =
+                                e.dataTransfer.files?.[0];
+
+                            if (file) {
+                                handleFile(file);
+                            }
+                        }}
+                        className={`
+            flex h-52 cursor-pointer items-center justify-center
+            rounded-lg border-2 border-dashed transition-colors
+            ${isDragging
+                                ? "border-primary bg-primary/5"
+                                : "border-muted-foreground/25"
+                            }
+        `}
+                    >
+                        <input
+                            id="logo-upload"
+                            type="file"
+                            accept="image/*"
+                            className="hidden"
+                            onChange={(e) => {
+                                const file =
+                                    e.target.files?.[0];
+
+                                if (file) {
+                                    handleFile(file);
+                                }
+                            }}
+                        />
+
+                        <label
+                            htmlFor="logo-upload"
+                            className="flex h-full w-full cursor-pointer items-center justify-center"
+                        >
+                            {preview ? (
+                                <div className="text-center space-y-2">
+                                    <Image
+                                        src={preview}
+                                        alt="Prévisualisation"
+                                        width={120}
+                                        height={120}
+                                        className="mx-auto rounded-lg object-cover"
+                                    />
+                                    <p className="text-sm text-muted-foreground">
+                                        Cliquez ou déposez une autre image
+                                    </p>
+                                </div>
+                            ) : logoUrl ? (
+                                <div className="text-center space-y-2">
+                                    <Image
+                                        src={logoUrl}
+                                        alt={name}
+                                        width={120}
+                                        height={120}
+                                        className="mx-auto rounded-lg object-cover opacity-70"
+                                    />
+
+                                    <p className="text-sm text-muted-foreground">
+                                        Cliquez ou déposez une autre image
+                                    </p>
+                                </div>
+                            ) : (
+                                <div className="text-center">
+                                    <p className="font-medium">
+                                        Glissez-déposez votre image ici
+                                    </p>
+
+                                    <p className="text-sm text-muted-foreground">
+                                        ou cliquez pour sélectionner un fichier
+                                    </p>
+                                </div>
+                            )}
+                        </label>
+                    </div>
                 </div>
 
                 <div>
-                    <label className="mb-2 block">
+                    <label className="mb-2 block text-sm font-medium">
                         Tags
                     </label>
 
@@ -258,7 +336,7 @@ export default function EditCompanyPage() {
                         <button
                             type="button"
                             onClick={addTag}
-                            className="rounded-lg border px-4"
+                            className="rounded-lg border px-4 bg-primary text-background transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 cursor-pointer"
                         >
                             Ajouter
                         </button>
@@ -272,7 +350,7 @@ export default function EditCompanyPage() {
                                 onClick={() =>
                                     removeTag(tag)
                                 }
-                                className="rounded-full bg-primary/80 text-background border border-border px-3 py-1"
+                                className="rounded-full bg-primary/80 text-background border border-border px-3 py-1 cursor-pointer transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                             >
                                 {tag} ✕
                             </button>
@@ -281,24 +359,24 @@ export default function EditCompanyPage() {
                 </div>
 
                 <div className="flex justify-end gap-4">
-                    <button
+                    <Button
+                        variant="secondary"
                         type="button"
                         onClick={() =>
                             router.push("/admin/companies")
                         }
-                        className="rounded-lg border px-4 py-2"
+                        className=""
                     >
                         Annuler
-                    </button>
+                    </Button>
 
-                    <button
+                    <Button
                         disabled={saving}
-                        className="rounded-lg bg-primary px-4 py-2 text-white"
                     >
                         {saving
                             ? "Enregistrement..."
                             : "Enregistrer"}
-                    </button>
+                    </Button>
                 </div>
             </form>
         </div>

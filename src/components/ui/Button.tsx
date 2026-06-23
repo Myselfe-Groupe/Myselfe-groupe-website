@@ -16,7 +16,7 @@ const variantMap: Record<Variant, string> = {
   primary:
     "bg-primary text-background",
   secondary:
-    "bg-secondary text-background",
+    "bg-background text-foreground border border-primary",
   outline:
     "bg-transparent text-background border border-background",
   destructive:
@@ -25,7 +25,7 @@ const variantMap: Record<Variant, string> = {
 
 const sizeMap: Record<Size, string> = {
   sm: "px-3 py-1 text-sm",
-  md: "px-4 py-2 text-base",
+  md: "px-5 py-3 text-base",
   lg: "px-8 py-4 text-base",
 };
 

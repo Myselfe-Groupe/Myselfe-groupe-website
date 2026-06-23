@@ -37,48 +37,20 @@ export default function AdminPage() {
         </p>
       </section>
 
-      <section id="overview" className="grid gap-4 xl:grid-cols-2">
-        <article className="rounded-2xl border border-border bg-background p-6 shadow-[0_20px_60px_rgba(31,43,91,0.06)]">
-          <p className="text-xs font-medium uppercase tracking-[0.3em] text-secondary">
-            Vue d'ensemble
-          </p>
-          <h2 className="mt-3 text-2xl font-semibold text-foreground">
-            Les prochaines actions à prioriser
-          </h2>
-          <p className="mt-3 text-sm leading-7 text-secondary">
-            Cette zone peut accueillir vos indicateurs principaux, les tâches en cours et les alertes importantes.
-          </p>
-        </article>
-
-        <article className="rounded-2xl border border-border bg-background p-6 shadow-[0_20px_60px_rgba(31,43,91,0.06)]">
-          <p className="text-xs font-medium uppercase tracking-[0.3em] text-secondary">
-            Raccourcis
-          </p>
-          <ul className="mt-4 space-y-3 text-sm text-secondary">
-            {dashboardTabs.map((tab) => (
-              <li key={tab.id} className="rounded-xl border border-border/70 bg-muted/50 p-4">
-                <span className="block font-medium text-foreground">{tab.title}</span>
-                <span className="mt-1 block leading-6">{tab.description}</span>
-              </li>
-            ))}
-          </ul>
-        </article>
-      </section>
-
       <section id="messages" className="grid gap-4 lg:grid-cols-2">
         <article className="rounded-2xl border border-border bg-background p-6">
           <p className="text-xs font-medium uppercase tracking-[0.3em] text-secondary">
-            Messages
+            Activités récemment enregistrées
           </p>
-          <h2 className="mt-3 text-2xl font-semibold text-foreground">Gestion des demandes</h2>
+          <h2 className="mt-3 text-2xl font-semibold text-foreground">Historique</h2>
           <p className="mt-3 text-sm leading-7 text-secondary">
-            Connectez ici la liste des messages reçus, leur statut de traitement et les réponses envoyées.
+            Cette section peut servir à afficher les dernières actions effectuées par les administrateurs, les modifications de contenu ou les mises à jour du site.
           </p>
         </article>
 
         <article className="rounded-2xl border border-border bg-background p-6">
           <p className="text-xs font-medium uppercase tracking-[0.3em] text-secondary">
-            Statut
+            Mesure d'audience
           </p>
           <div className="mt-4 space-y-4 text-sm text-secondary">
             <div className="rounded-xl border border-border/70 bg-muted/50 p-4">
@@ -96,20 +68,20 @@ export default function AdminPage() {
       <section id="content" className="grid gap-4 lg:grid-cols-2">
         <article className="rounded-2xl border border-border bg-background p-6">
           <p className="text-xs font-medium uppercase tracking-[0.3em] text-secondary">
-            Contenu du site
+            Accès rapides
           </p>
-          <h2 className="mt-3 text-2xl font-semibold text-foreground">Modifier les contenus</h2>
+          <h2 className="mt-3 text-2xl font-semibold text-foreground">Raccourcis</h2>
           <p className="mt-3 text-sm leading-7 text-secondary">
-            Cette section peut servir à publier les actualités, modifier la page d’accueil ou actualiser les visuels.
+            Cette section peut servir à regrouper les liens vers les pages de gestion de contenu, les formulaires d’édition et les outils d’administration.
           </p>
         </article>
 
         <article className="rounded-2xl border border-border bg-background p-6">
           <p className="text-xs font-medium uppercase tracking-[0.3em] text-secondary">
-            Maintenance
+            Stockage
           </p>
           <p className="mt-3 text-sm leading-7 text-secondary">
-            Ajoutez ici les outils de publication, de prévisualisation et de validation avant mise en ligne.
+            Données liés au stockage des fichiers, aux images et aux médias du site.
           </p>
         </article>
       </section>
